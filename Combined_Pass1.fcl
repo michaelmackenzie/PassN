@@ -18,15 +18,6 @@ physics.producers : {
       module_type: MSDHitsFromDTCEvents
       debugLevel: 0
     }
-    # EventHeader (EWT, mode, flags) from the CFO fragment. The EventWindowMarker and
-    # ProtonBunchTime used by reco and EventNtuple come from EWMProducer, so don't make
-    # a second (placeholder) copy here
-    ProcessCFOData : {
-      module_type : EventHeaderFromCFOFragment
-      cfoTag      : "fragmentAggregator:CFO"
-      createEWM   : false
-      diagLevel   : 0
-    }
   }
 physics.analyzers : {
     CrvDQMcollector: @local::CrvDQMcollector
@@ -35,7 +26,7 @@ physics.CaloRecoPath : [ CaloDigis, CaloRecoDigiMaker, CaloHitMaker, CaloProtoCl
 physics.CRVRecoPath : [ CrvDigi, CrvRecoPulses, CrvCoincidenceClusterFinder ]
 physics.RecoPath : [ CaloDigis, CaloRecoDigiMaker, CaloHitMaker, CaloProtoClusterMaker, CaloClusterMaker, @sequence::physics.RecoPath ]
 physics.CRVEndPath : [ CrvDQMcollector ]
-physics.MSDRecoPath : [ ProcessCFOData, MSDHitMaker ]
+physics.MSDRecoPath : [ EWMProducer, MSDHitMaker ]
 physics.trigger_paths  : [RecoPath, CaloRecoPath, CRVRecoPath, MSDRecoPath]
 physics.end_paths : [CRVEndPath, EndPath]
 
@@ -49,7 +40,7 @@ outputs.KinematicLineOutput.outputCommands : [ "drop *_*_*_*",
       "keep mu2e::CrvRecoPulses_*_*_*",
       "keep mu2e::CrvDigis_*_*_*",
       "keep mu2e::CrvDAQerrors_*_*_*",
-      "keep *_ProcessCFOData_*_*",
+      "keep *_EWMProducer_*_*",
       "keep mu2e::CrvCoincidenceClusters_*_*_*",
       "keep mu2e::CrvStatuss_*_*_*",
       "drop artdaq::*_*_*_*" ,

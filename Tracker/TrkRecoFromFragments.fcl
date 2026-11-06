@@ -1,2 +1,3 @@
+#include "mu2e-trig-config/core/producers/trigDAQProducers.fcl"
 #include "PassN/Tracker/TrkRecoFromDigi.fcl"
 #include "PassN/Tracker/TrkRecoFromFragments_epilog.fcl"

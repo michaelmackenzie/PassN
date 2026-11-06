@@ -1,7 +1,6 @@
-physics.producers.EWMProducer: {
-          @table::CommonMC.DigiProducers.EWMProducer
-          SpillType: 0
-      }
+# EventHeader, EventWindowMarker and ProtonBunchTime from the CFO fragment, decoded as in the trigger.
+# Without CFO data it puts a default (off-spill, PBT = 0) marker and header, and warns
+physics.producers.EWMProducer: @local::TrigDAQProducers.EWMProducer
 physics.producers.makeSD: {
           module_type: StrawDigisFromArtdaqFragments
           saveWaveforms : true

@@ -27,14 +27,7 @@ physics :
 {
   producers :
   {
-    EWMProducer :
-    {
-      module_type : EventHeaderFromCFOFragment
-      cfoTag      : "daq:CFO"
-      createEWM   : true
-      isSim       : false
-      diagLevel   : 0
-    }
+    EWMProducer : @local::TrigDAQProducers.EWMProducer # CFO decoding as in the trigger
     CrvDigi :
     {
       module_type   : CrvDigisFromArtdaqFragmentsFEBII
