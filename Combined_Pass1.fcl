@@ -72,10 +72,11 @@ physics.producers.LineFinder.MaxLines : 3
 physics.producers.LineFinder.MaxWireDistPull : 3
 # Skip lines parallel to the planes (dz = 0): KKLine can't fit them. The shower filter removed the clusters that make them
 physics.producers.LineFinder.SkipFlatLines : true
-# Search all time clusters: CosmicShowerFilter calls a cluster a shower when hits in one panel change layer twice. That
-# rejects nearly every cluster with two tracks, but also single tracks that cross 3 or more straws of a panel (e.g. a
-# cosmic nearly parallel to the planes), and most of the clusters this adds have one line. The filter still runs, and
-# its clusters are stored to show which ones it would have rejected
+# Search all time clusters: within a panel, with hits sorted by straw number, CosmicShowerFilter calls a cluster a
+# shower if the hits change layer twice, or if hits leave too many live straws out. That rejects nearly every cluster
+# with two tracks, but also some single tracks, e.g. a cosmic nearly parallel to the planes that hits three
+# neighbouring straws (layers 0, 1, 0). Most of the clusters this adds have one line. The filter still runs, and its
+# clusters are stored to show which ones it would have rejected
 physics.producers.LineFinder.TimeClusterCollection : "SimpleTimeCluster"
 
 ### CALO CONFIG ###
